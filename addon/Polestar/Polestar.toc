@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar
 ## Notes: Leveling guides for World of Warcraft: Forever.
 ## Title-deDE: Polestar

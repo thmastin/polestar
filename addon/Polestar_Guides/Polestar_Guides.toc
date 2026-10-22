@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides
 ## Notes: Leveling, profession, reputation and collectible guides for Polestar.
 ## Title-deDE: Polestar Guides

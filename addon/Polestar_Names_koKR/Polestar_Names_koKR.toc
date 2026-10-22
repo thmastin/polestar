@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Names (koKR)
 ## Notes: Names of quests, NPCs, objects, items, instances and more in Korean for Polestar. Loaded on demand on a Korean client.
 ## Title-deDE: Polestar Namen (koKR)

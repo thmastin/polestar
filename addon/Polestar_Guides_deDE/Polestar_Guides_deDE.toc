@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (deDE)
 ## Notes: German texts of Polestar Guides. Loaded on demand on a German client.
 ## Title-deDE: Polestar Guides (deDE)

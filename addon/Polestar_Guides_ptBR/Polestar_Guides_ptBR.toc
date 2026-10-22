@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (ptBR)
 ## Notes: Portuguese (Brazil) texts of Polestar Guides. Loaded on demand on a Portuguese (Brazil) client.
 ## Title-deDE: Polestar Guides (ptBR)

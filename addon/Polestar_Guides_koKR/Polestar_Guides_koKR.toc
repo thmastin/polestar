@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (koKR)
 ## Notes: Korean texts of Polestar Guides. Loaded on demand on a Korean client.
 ## Title-deDE: Polestar Guides (koKR)

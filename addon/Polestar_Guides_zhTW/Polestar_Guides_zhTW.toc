@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (zhTW)
 ## Notes: Chinese (traditional) texts of Polestar Guides. Loaded on demand on a Chinese (traditional) client.
 ## Title-deDE: Polestar Guides (zhTW)

@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (frFR)
 ## Notes: French texts of Polestar Guides. Loaded on demand on a French client.
 ## Title-deDE: Polestar Guides (frFR)

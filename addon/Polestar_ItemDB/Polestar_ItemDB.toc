@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Item Data
 ## Notes: Item stats for Polestar's gear advice. Loaded on demand.
 ## Title-deDE: Polestar Gegenstandsdaten

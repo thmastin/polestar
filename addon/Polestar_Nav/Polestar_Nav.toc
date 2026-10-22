@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Nav
 ## Notes: Part of Polestar: walking routes for the arrow, by Polestar's walking router, started from Shortest Path Forever's pathing (Cillian Berragan, github.com/cjber/shortest-path-forever, used with his permission). Loaded on demand.
 ## Title-deDE: Polestar Navigation

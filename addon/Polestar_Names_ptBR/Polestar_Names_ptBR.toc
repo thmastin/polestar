@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Names (ptBR)
 ## Notes: Names of quests, NPCs, objects, items, instances and more in Portuguese (Brazil) for Polestar. Loaded on demand on a Portuguese (Brazil) client.
 ## Title-deDE: Polestar Namen (ptBR)

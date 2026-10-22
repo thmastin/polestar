@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (esMX)
 ## Notes: Spanish (Latin America) texts of Polestar Guides. Loaded on demand on a Spanish (Latin America) client.
 ## Title-deDE: Polestar Guides (esMX)

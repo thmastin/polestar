@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (esES)
 ## Notes: Spanish (Spain) texts of Polestar Guides. Loaded on demand on a Spanish (Spain) client.
 ## Title-deDE: Polestar Guides (esES)

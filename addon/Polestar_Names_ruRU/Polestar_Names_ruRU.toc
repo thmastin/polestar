@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Names (ruRU)
 ## Notes: Names of quests, NPCs, objects, items, instances and more in Russian for Polestar. Loaded on demand on a Russian client.
 ## Title-deDE: Polestar Namen (ruRU)

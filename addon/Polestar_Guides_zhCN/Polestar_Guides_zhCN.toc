@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 11509, 16001
 ## Title: Polestar Guides (zhCN)
 ## Notes: Chinese (simplified) texts of Polestar Guides. Loaded on demand on a Chinese (simplified) client.
 ## Title-deDE: Polestar Guides (zhCN)
