@@ -99,6 +99,40 @@ test('quest objectives normalize to text/type/finished/numFulfilled/numRequired'
 	});
 });
 
+test('without the retail quest calls, quests read from the legacy quest log (Classic Era)', () => {
+	const [out] = run(`
+		C_QuestLog.IsOnQuest, C_QuestLog.IsQuestFlaggedCompleted, C_QuestLog.GetQuestObjectives = nil, nil, nil
+		C_QuestLog.ReadyForTurnIn, C_QuestLog.IsComplete, C_QuestLog.GetTitleForQuestID = nil, nil, nil
+		local log = {
+			{ "Elwynn", 0, nil, true },
+			{ "Kobold Camp Cleanup", 1, nil, false, false, nil, nil, 7 },
+			{ "Wolves Across the Border", 2, nil, false, false, 1, nil, 33 },
+		}
+		GetNumQuestLogEntries = function() return #log end
+		GetQuestLogTitle = function(i) return unpack(log[i]) end
+		GetNumQuestLeaderBoards = function(i) return i == 2 and 1 or 0 end
+		GetQuestLogLeaderBoard = function() return "Kobold Worker slain: 3/10", "monster", false end
+		GetQuestsCompleted = function() return { [62] = true } end
+		local objs = C.GetQuestObjectives(7)
+		emit({
+			on = { C.IsOnQuest(7), C.IsOnQuest(99) },
+			ready = { C.IsQuestReadyForTurnIn(7), C.IsQuestReadyForTurnIn(33), C.IsQuestReadyForTurnIn(99) },
+			title = C.GetQuestTitle(33),
+			done = { C.IsQuestCompleted(62), C.IsQuestCompleted(7) },
+			count = { objs[1].numFulfilled, objs[1].numRequired, objs[1].finished },
+			noObjs = C.GetQuestObjectives(99) == nil,
+		})
+	`);
+	assert.deepEqual(out, {
+		on: [true, false],
+		ready: [false, true, false],
+		title: 'Wolves Across the Border',
+		done: [true, false],
+		count: [3, 10, false],
+		noObjs: true,
+	});
+});
+
 test('GetNpcID parses creature and object GUIDs and ignores players', () => {
 	const [out] = run(`
 		w.units.npc = "Creature-0-4372-0-17-197-00001A2B3C"

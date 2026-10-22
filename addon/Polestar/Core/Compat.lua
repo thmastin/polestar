@@ -214,9 +214,24 @@ end
 -- Quests
 ---------------------------------------------------------------------------
 
+-- Classic Era has no C_QuestLog log index or ready-for-turn-in calls: its
+-- quest log is the legacy GetQuestLogTitle list. These read it by quest ID.
+local function legacyEntry(questID)
+	if not (GetNumQuestLogEntries and GetQuestLogTitle) then return nil end
+	for i = 1, GetNumQuestLogEntries() or 0 do
+		local title, _, _, isHeader, _, isComplete, _, id = GetQuestLogTitle(i)
+		if not isHeader and id == questID then return i, title, isComplete end
+	end
+	return nil
+end
+
 function Compat.IsQuestCompleted(questID)
 	if C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted then
 		return C_QuestLog.IsQuestFlaggedCompleted(questID) and true or false
+	end
+	if GetQuestsCompleted then
+		local done = GetQuestsCompleted()
+		return type(done) == "table" and done[questID] and true or false
 	end
 	return false
 end
@@ -225,19 +240,33 @@ function Compat.IsOnQuest(questID)
 	if C_QuestLog and C_QuestLog.IsOnQuest then
 		return C_QuestLog.IsOnQuest(questID) and true or false
 	end
-	return false
+	return legacyEntry(questID) ~= nil
 end
 
 function Compat.IsQuestReadyForTurnIn(questID)
-	if not (C_QuestLog and C_QuestLog.IsOnQuest and C_QuestLog.IsOnQuest(questID)) then return false end
-	if C_QuestLog.ReadyForTurnIn and C_QuestLog.ReadyForTurnIn(questID) then return true end
-	if C_QuestLog.IsComplete and C_QuestLog.IsComplete(questID) then return true end
-	return false
+	if not Compat.IsOnQuest(questID) then return false end
+	if C_QuestLog and C_QuestLog.ReadyForTurnIn and C_QuestLog.ReadyForTurnIn(questID) then return true end
+	if C_QuestLog and C_QuestLog.IsComplete and C_QuestLog.IsComplete(questID) then return true end
+	local _, _, isComplete = legacyEntry(questID)
+	return isComplete == 1
 end
 
 function Compat.GetQuestObjectives(questID)
-	if not (C_QuestLog and C_QuestLog.GetQuestObjectives) then return nil end
-	local raw = C_QuestLog.GetQuestObjectives(questID)
+	local raw
+	if C_QuestLog and C_QuestLog.GetQuestObjectives then raw = C_QuestLog.GetQuestObjectives(questID) end
+	if type(raw) ~= "table" or #raw == 0 then
+		raw = nil
+		local idx = legacyEntry(questID)
+		if idx and GetNumQuestLeaderBoards and GetQuestLogLeaderBoard then
+			raw = {}
+			for i = 1, GetNumQuestLeaderBoards(idx) or 0 do
+				local text, otype, done = GetQuestLogLeaderBoard(i, idx)
+				local cur, req = tostring(text or ""):match("(%d+)%s*/%s*(%d+)")
+				raw[i] = { text = text, type = otype, finished = done,
+					numFulfilled = tonumber(cur) or 0, numRequired = tonumber(req) or 0 }
+			end
+		end
+	end
 	if type(raw) ~= "table" or #raw == 0 then return nil end
 	local out = {}
 	for i = 1, #raw do
@@ -272,6 +301,8 @@ function Compat.GetQuestTitle(questID)
 		local t = C_QuestLog.GetTitleForQuestID(questID)
 		if t and t ~= "" then return t end
 	end
+	local _, title = legacyEntry(questID)
+	if title and title ~= "" then return title end
 	return nil
 end
 
