@@ -492,7 +492,13 @@ local function gridSize(val, at, links, cls)
 end
 
 local function evict(st, oldest)
-	decodedKB, decodedCount = decodedKB - st.sizes[oldest], decodedCount - 1
+	local size = st.sizes[oldest]
+	if size == nil then
+		-- A use stamp with no published grid: clear the stamp only.
+		st.used[oldest] = nil
+		return
+	end
+	decodedKB, decodedCount = decodedKB - size, decodedCount - 1
 	st.sizes[oldest], st.used[oldest] = nil, nil
 	st.val[oldest], st.moves[oldest], st.z[oldest], st.at[oldest], st.links[oldest] = nil, nil, nil, nil, nil
 	st.cls[oldest], st.area[oldest] = nil, nil
